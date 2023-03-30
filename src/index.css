@@ -1,9 +1,6 @@
 body {
   margin: 0;
+  font-family: General Sans, system-ui, Avenir, Helvetica, Arial, sans-serif;
   background-color: #3f3f3f;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
