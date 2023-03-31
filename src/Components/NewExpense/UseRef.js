@@ -17,4 +17,5 @@ function UpdateCount(){
 
 
 export default UpdateCount
-// create a comp that uses use ref to refrence to an array and append a new array to it every time the btn is clicked
+
+//create a comp that uses use ref to refrence to an array and append a new array to it every time the btn is clicked
