@@ -4,6 +4,9 @@ import Expense from "./Components/Expenses/Expense";
 import NewExpense from "./Components/NewExpense/NewExpense";
 import UseEffect from "./Components/NewExpense/UseEffect";
 import UpdateCount from "./Components/NewExpense/UseRef";
+import ErrorBoundary from "./Components/ErrorBoundry";
+import MyComponent from "./Components/MyComponent";
+import SignUp from "./Components/SignUp/SignUpForm";
 const DUMMY_EXPENSES = [
   {
     id: "e1",
@@ -26,94 +29,100 @@ const DUMMY_EXPENSES = [
   },
 ];
 const App = () => {
-  // const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
-  // const addExpenseHandler = (expense)=>{
-  //   setExpenses((prevExpenses)=>{
-  //     return [expense,...prevExpenses];
-  //   });
-  // };
-  // return (
-  //   <div>
-  //     <NewExpense onAddExpense={addExpenseHandler}/>
-  //     <Expense items = {expenses}/>
-  //   </div>
-  // );
+  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  const addExpenseHandler = (expense)=>{
+    setExpenses((prevExpenses)=>{
+      return [expense,...prevExpenses];
+    });
+  };
+  return (
+    <div>
+      <SignUp/>
+      <NewExpense onAddExpense={addExpenseHandler}/>
+      <Expense items = {expenses}/>
+    </div>
+  );
+}
+//     const Ref = useRef(null);
+  
+//     // The state for our timer
+//     const [timer, setTimer] = useState('00:00:00');
+  
+  
+//     const getTimeRemaining = (e) => {
+//         const total = Date.parse(e) - Date.parse(new Date());
+//         const seconds = Math.floor((total / 1000) % 60);
+//         const minutes = Math.floor((total / 1000 / 60) % 60);
+//         const hours = Math.floor((total / 1000 / 60 / 60) % 24);
+//         return {
+//             total, hours, minutes, seconds
+//         };
+//     }
+  
+  
+//     const startTimer = (e) => {
+//         let { total, hours, minutes, seconds } 
+//                     = getTimeRemaining(e);
+//         if (total >= 0) {
 
-    const Ref = useRef(null);
-  
-    // The state for our timer
-    const [timer, setTimer] = useState('00:00:00');
-  
-  
-    const getTimeRemaining = (e) => {
-        const total = Date.parse(e) - Date.parse(new Date());
-        const seconds = Math.floor((total / 1000) % 60);
-        const minutes = Math.floor((total / 1000 / 60) % 60);
-        const hours = Math.floor((total / 1000 / 60 / 60) % 24);
-        return {
-            total, hours, minutes, seconds
-        };
-    }
+//             setTimer(
+//                 (hours > 9 ? hours : '0' + hours) + ':' +
+//                 (minutes > 9 ? minutes : '0' + minutes) + ':'
+//                 + (seconds > 9 ? seconds : '0' + seconds)
+//             )
+//         }
+//     }
   
   
-    const startTimer = (e) => {
-        let { total, hours, minutes, seconds } 
-                    = getTimeRemaining(e);
-        if (total >= 0) {
-
-            setTimer(
-                (hours > 9 ? hours : '0' + hours) + ':' +
-                (minutes > 9 ? minutes : '0' + minutes) + ':'
-                + (seconds > 9 ? seconds : '0' + seconds)
-            )
-        }
-    }
-  
-  
-    const clearTimer = (e) => {
+//     const clearTimer = (e) => {
  
-        setTimer('00:00:10');
+//         setTimer('00:00:10');
   
-        if (Ref.current) clearInterval(Ref.current);
-        const id = setInterval(() => {
-            startTimer(e);
-        }, 1000)
-        Ref.current = id;
-    }
+//         if (Ref.current) clearInterval(Ref.current);
+//         const id = setInterval(() => {
+//             startTimer(e);
+//         }, 1000)
+//         Ref.current = id;
+//     }
   
-    const getDeadTime = () => {
-        let deadline = new Date();
+//     const getDeadTime = () => {
+//         let deadline = new Date();
   
-        // This is where you need to adjust if 
-        // you entend to add more time
-        deadline.setSeconds(deadline.getSeconds() + 10);
-        return deadline;
-    }
+//         // This is where you need to adjust if 
+//         // you entend to add more time
+//         deadline.setSeconds(deadline.getSeconds() + 10);
+//         return deadline;
+//     }
   
-    // We can use useEffect so that when the component
-    // mount the timer will start as soon as possible
+//     // We can use useEffect so that when the component
+//     // mount the timer will start as soon as possible
   
-    // We put empty array to act as componentDid
-    // mount only
-    useEffect(() => {
-        clearTimer(getDeadTime());
-    }, []);
+//     // We put empty array to act as componentDid
+//     // mount only
+//     useEffect(() => {
+//         clearTimer(getDeadTime());
+//     }, []);
   
    
-    const onClickReset = () => {
-        clearTimer(getDeadTime());
-    }
+//     const onClickReset = () => {
+//         clearTimer(getDeadTime());
+//     }
     
   
-    return (
-        <div className="App">
-            <h2>{timer}</h2>
-            <button onClick={onClickReset}>Reset</button>
-            <UseEffect />
-            <UpdateCount />
-        </div>
-    )
-}
+//     return (
+//         <div className="App">
+//             <h2>{timer}</h2>
+//             <button onClick={onClickReset}>Reset</button>
+//             <UseEffect />
+//             <UpdateCount />
+//             <ErrorBoundary> 
+//             <MyComponent data="Hello, World!" />
+//             <MyComponent data="error" />
+//             </ErrorBoundary>
+//             <SignUp/>
+//         </div>
+//     )
+// }
 
 export default App;
 
